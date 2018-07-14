@@ -71,7 +71,7 @@ f.close()
 ```
 生成的example.png如下图所示
 
-![example.png](https://github.com/sacredfire666/JinpingDataCompetition/blob/master/1tPrototype/doc/example.png)
+![example.png](https://github.com/sacredfire666/JinpingDataCompetition/raw/master/1tPrototype/doc/example.png)
 
 
 利用C++读取数据的示例如下。这里使用了HighFive库（ https://github.com/BlueBrain/HighFive ）作为读取HDF5文件的interface，大家也可以使用其他自己熟悉的库。
