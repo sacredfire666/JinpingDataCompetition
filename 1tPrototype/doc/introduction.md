@@ -1,11 +1,11 @@
-#锦屏中微子实验一吨原型机介绍
+# 锦屏中微子实验一吨原型机介绍
 
 ## 探测器
 
 为了研究大型中微子实验所用到的液体闪烁体技术和低本底技术，我们在锦屏地下实验室中建造了一个小型原型机。其的核心部件包括1吨液体闪烁体和30个光电倍增管（PMT）。粒子在液体闪烁体中沉积能量，光电倍增管会将闪烁体发出的光信号转化为电信号读出，通过分析这30个光电倍增管上的电压波形，我们就可以得到原初粒子的能量、位置等信息，进而进行相关的物理分析。
 
 <center>
-![detector.png](.\detector.png)
+![detector.png](https://github.com/sacredfire666/JinpingDataCompetition/raw/master/1tPrototype/doc/detector.png)
 锦屏中微子实验一吨原型机结构示意图
 </center>
 
@@ -70,7 +70,7 @@ f.close()
 ```
 生成的example.png如下图所示
 <center>
-![example.png](.\example.png)
+![example.png](https://github.com/sacredfire666/JinpingDataCompetition/blob/master/1tPrototype/doc/example.png)
 </center>
 
 利用C++读取数据的示例如下。这里使用了HighFive库（ https://github.com/BlueBrain/HighFive ）作为读取HDF5文件的interface，大家也可以使用其他自己熟悉的库。
