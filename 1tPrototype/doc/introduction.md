@@ -4,8 +4,10 @@
 
 为了研究大型中微子实验所用到的液体闪烁体技术和低本底技术，我们在锦屏地下实验室中建造了一个小型原型机。其的核心部件包括1吨液体闪烁体和30个光电倍增管（PMT）。粒子在液体闪烁体中沉积能量，光电倍增管会将闪烁体发出的光信号转化为电信号读出，通过分析这30个光电倍增管上的电压波形，我们就可以得到原初粒子的能量、位置等信息，进而进行相关的物理分析。
 
-![detector.png](https://github.com/sacredfire666/JinpingDataCompetition/raw/master/1tPrototype/doc/detector.png)
 锦屏中微子实验一吨原型机结构示意图
+
+![detector.png](https://github.com/sacredfire666/JinpingDataCompetition/raw/master/1tPrototype/doc/detector.png)
+
 
 
 探测器每次运行被称为一个run，每个run中都包含了很多个触发事例，被称为event。我们记录下来的主要信息就是每个事例的触发时间戳，以及30个PMT（编号从0到29）上的波形。值得注意的是，并不是每个事例都会触发全部30个PMT，我们将触发阈值设为25个PMT，即大于或等于25个PMT同时接收到光信号时才将事例记录下来，也只记录有触发的PMT上的波形。记录波形的长度（即时间窗）为1029ns，时间分辨为1ns，因此每个PMT上的波形被记录为一个长度为1029的数组。波形在每个时间点上的电压由10位ADC转化成数字信号，取值为0到1023。
