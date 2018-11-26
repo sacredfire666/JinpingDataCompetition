@@ -16,7 +16,7 @@ RunNo = int(sys.argv[1])
 FileNo = 0
 windowSize = 1029
 
-f = h5py.File("data/Run%d.h5"%(RunNo), "w")
+f = h5py.File("Run%d.h5"%(RunNo), "w")
 g1 = f.create_group("TriggerInfo")
 g2 = f.create_group("Waveform")
 
@@ -78,8 +78,8 @@ while True:
         dset1[-sec.shape[0]:] = sec
         dset2[-nanosec.shape[0]:] = nanosec
         dset3.resize(dset3.shape[0]+ch_entry, axis=0)
-    	dset4.resize(dset4.shape[0]+ch_entry, axis=0)
-    	dset5.resize(dset5.shape[0]+ch_entry, axis=0)
+        dset4.resize(dset4.shape[0]+ch_entry, axis=0)
+        dset5.resize(dset5.shape[0]+ch_entry, axis=0)
         dset3[-ch_evtid.shape[0]:] = ch_evtid
         dset4[-chlid.shape[0]:] = chlid
         dset5[-wav.shape[0]:] = wav

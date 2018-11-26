@@ -1,0 +1,52 @@
+% Created 2018-10-24 Wed 22:28
+% Intended LaTeX compiler: xelatex
+\documentclass[11pt,a4paper]{article}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage[export]{adjustbox}
+\author{Ziyi Guo, Benda Xu}
+\date{\today}
+\title{Judge for the Data Contest}
+\hypersetup{
+ pdfauthor={Ziyi Guo, Benda Xu},
+ pdftitle={Judge for the Data Contest},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.1.1 (Org mode 9.0.3)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Data Generation}
+\label{sec:orgd2c074a}
+\begin{equation}
+  \label{eq:1}
+  \begin{aligned}
+  \sum_i^N A_i f_\mathrm{PE}(t-T_i-\Delta{t}) + \epsilon \\
+  \Delta{t} \sim \mathcal{N}(0, 3) \si{\ns} \\
+  A_i \sim \mathcal{N}(1, 0.3) \\
+  \epsilon \sim \mathcal{N}(0, 1) \\
+  \end{aligned}
+\end{equation}
+\section{Target Function}
+\label{sec:org114a5f6}
+Suppose \(\{T_i\}\) is the true sequence and a contestant submits
+\(\{G_j\}\).  2 target functions are considered:
+
+\begin{equation}
+  \label{eq:2}
+  \int (\sum_i f_\mathrm{PE}(t-T_i) - \sum_j f_\mathrm{PE}(t-G_j))^2 \mathrm{d}t
+\end{equation}
+
+\begin{equation}
+  \label{eq:3}
+  \int |\mathrm{CDF}_T(t) - \mathrm{CDF}_G(t)| \mathrm{d}t
+\end{equation}
+\end{document}
