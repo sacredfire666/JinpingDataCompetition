@@ -1,47 +1,42 @@
+#include "hdf5.h"
+#include "hdf5_hl.h"
+#include <stdlib.h>
 #include <iostream>
-#include <string>
-#include <vector>
-#include <highfive/H5File.hpp>
-#include <highfive/H5DataSet.hpp>
-#include <highfive/H5DataSpace.hpp>
-using namespace HighFive;
+using namespace std;
 
-void read_dataset() {
-    // Open the existing hdf5 file
-    File file("data/Run669.h5", File::ReadOnly);
+constexpr size_t nWindowSize = 1029;
+constexpr size_t nFields = 3;
 
-    std::vector<int> evtid;
-    std::vector<int> channelid;
-    std::vector<std::vector<int> > waveform;
+struct WaveformData
+{
+    long long EventID;
+    short   ChannelID;
+    short   Waveform[nWindowSize];
+};
 
-    // Get the dataset
-    DataSet evtid_dset = file.getDataSet("Waveform/EventID");
-    DataSet channelid_dset = file.getDataSet("Waveform/ChannelID");
-    DataSet waveform_dset = file.getDataSet("Waveform/Waveform");
+int main()
+{
+    WaveformData wf_buf;
 
-    // Convert the waveform data to containers
-    evtid_dset.read(evtid);
-    channelid_dset.read(channelid);
-    waveform_dset.read(waveform);
+    /* Calculate the size and the offsets of our struct members in memory */
+    size_t dst_size =  sizeof(WaveformData);
+    size_t dst_offset[nFields] = { HOFFSET( WaveformData, EventID ),
+        HOFFSET( WaveformData, ChannelID ),
+        HOFFSET( WaveformData, Waveform )
+    };
+    size_t dst_sizes[nFields] = { sizeof(wf_buf.EventID), 
+        sizeof(wf_buf.ChannelID), 
+        sizeof(wf_buf.Waveform)
+    };
+    
+    hid_t file_id = H5Fopen( "test.h5", H5F_ACC_RDONLY,  H5P_DEFAULT);
+    hid_t group_id = H5Gopen(file_id, "OneTonDetector", H5P_DEFAULT);
+    H5TBread_records( group_id, "Waveform", 0, 1, dst_size, dst_offset, dst_sizes, &wf_buf);
+    for(int i=0; i<nWindowSize; i++)
+        cout<<wf_buf.Waveform[i]<<", ";
+    cout<<endl;
 
-    // Print the waveform of Event#1 PMT#2
-    for(size_t i=0; i<evtid.size(); i++)
-    {
-        if(evtid[i]==1 && channelid[i]==2)
-        {
-            for(auto&& v : waveform[i])
-                std::cout<<v<<std::endl;
-            break;
-        }
-    }
+    H5Fclose( file_id );
+    return 0;
 }
 
-int main(void) {
-    try {
-        read_dataset();
-    } catch (Exception& err) {
-        // catch and print any HDF5 error
-        std::cerr << err.what() << std::endl;
-    }
-    return 0; // successfully terminated
-}

@@ -1,49 +1,31 @@
-import pandas as pd
-import numpy as np
-import h5py
+import tables
 import matplotlib
-matplotlib.use("agg")
 import matplotlib.pyplot as plt
 
 # Read hdf5 file
 filename = "test.h5"
-f = h5py.File(filename,"r")
-evtid = f["Waveform/EventID"][:]
-chlid = f["Waveform/ChannelID"][:]
-wav = f["Waveform/Waveform"][:]
-wav = np.column_stack((chlid,wav))
+h5file = tables.open_file(filename, "r")
 
-evtid_truth = f["GroundTruth/EventID"][:]
-chlid_truth = f["GroundTruth/ChannelID"][:]
-PETime = f["GroundTruth/PETime"][:]
+WaveformTable = h5file.root.OneTonDetector.Waveform
+entry = 0
+EventId = WaveformTable[entry]['EventID']
+ChannelId = WaveformTable[entry]['ChannelID']
+Waveform = WaveformTable[entry]['Waveform']
+minpoint = min(Waveform)
+maxpoint = max(Waveform)
 
-column_name = ["ChannelID"]
-for i in range(1029):
-    column_name.append("Tick%d"%i)
+GroundTruthTable = h5file.root.OneTonDetector.GroundTruth
+PETime = [x['PETime'] for x in GroundTruthTable.iterrows() if x['EventID'] == EventId and x['ChannelID']==ChannelId]
+print(PETime)
 
-# Create a DataFrame. EventID is the index.
-wavdf = pd.DataFrame(wav, columns=column_name, index=evtid)
-
-# Print the fired PMTs in the EventID=1 event
-eid = 1
-print(wavdf.loc[eid]["ChannelID"])
-
-# Plot the waveform of #0 PMT
-wav_e1p2 = wavdf.loc[eid].query("ChannelID==0")
-wav_e1p2 = wav_e1p2.iloc[0].values[1:]
-plt.plot(wav_e1p2)
+plt.plot(Waveform)
 plt.xlabel('Time [ns]')
 plt.ylabel('Voltage [ADC]')
+for time in PETime:
+    plt.vlines(time, minpoint, maxpoint, 'r')
 
-time1 = PETime[0]
-plt.plot([time1,time1],[940,980])
+plt.title("Entry %d, Event %d, Channel %d" % (entry, EventId, ChannelId))
 
-plt.savefig("example.png")
+plt.show()
 
-
-# Calculate the pedestal
-ped = np.mean(wavdf.iloc[:,1:150], axis=1)
-peddf = pd.DataFrame({'ChannelID': chlid, 'Pedestal': ped})
-#print(peddf)
-
-f.close()
+h5file.close()
