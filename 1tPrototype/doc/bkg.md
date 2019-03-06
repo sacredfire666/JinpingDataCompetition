@@ -6,7 +6,6 @@
 
 为了研究锦屏中微子实验所用到的液体闪烁体和低本底技术，我们在锦屏地下实验室中建造了一个小型原型机。其核心部件包括1吨液体闪烁体和30个光电倍增管（PMT）。高速运动的微观粒子在液体闪烁体中沉积能量，闪烁体会发出荧光，光电倍增管会将这些光信号转化为电信号输出。通过分析这30个光电倍增管上的电压波形，我们就可以得到原初粒子的能量、位置等信息，进而进行相关的物理分析。
 
-更多的物理背景可以查看补充材料[幽灵粒子的前世今生](https://ghost-hunter-contest.github.io/)。
 
 <div align=center>
 <img src="https://raw.githubusercontent.com/sacredfire666/JinpingDataCompetition/master/1tPrototype/doc/detector.png" width = "80%" alt="锦屏中微子实验一吨原型机结构示意图"/><br/>
