@@ -20,7 +20,7 @@
 
 <div align=center>
 <img src="https://raw.githubusercontent.com/sacredfire666/JinpingDataCompetition/master/1tPrototype/doc/PMT.png" width = "30%" alt="日本滨松于20世纪80年代开发出的直径为20英寸的光电倍增管"/><br/>
-日本滨松于20世纪80年代开发出的直径为20英寸的光电倍增管。这项发明在2014年被认定为[IEEE里程碑](http://ieeemilestones.ethw.org/Main_Page)之一。
+日本滨松于20世纪80年代开发出的直径为20英寸的光电倍增管。这项发明在2014年被认定为<a href="https://ethw.org/Milestones:List_of_IEEE_Milestones">IEEE里程碑</a>之一。
 </div>
 
 光电倍增管被光子击中并产生光电子后，经过多级倍增，会产生一个近似对数高斯形状的脉冲输出。一个典型的波形如图所示，
