@@ -8,7 +8,7 @@
 
 更多的物理背景可以查看补充材料[幽灵粒子的前世今生](https://ghost-hunter-contest.github.io/)。
 
-<div align=center>
+<div align="center">
 <img src="https://raw.githubusercontent.com/sacredfire666/JinpingDataCompetition/master/1tPrototype/doc/detector.png" width = "80%" alt="锦屏中微子实验一吨原型机结构示意图"/><br/>
 锦屏中微子实验一吨原型机结构示意图
 </div>
@@ -18,13 +18,13 @@
 ### 光电倍增管与输出
 光电倍增管（PMT）是一种特殊的真空管仪器，它利用光电效应将微弱的光信号转化为电子信号（被称为光电子photoelectron, PE），并将其放大10<sup>7</sup>到10<sup>8</sup>倍，使光信号能被测量。
 
-<div align=center>
+<div align="center">
 <img src="https://raw.githubusercontent.com/sacredfire666/JinpingDataCompetition/master/1tPrototype/doc/PMT.png" width = "30%" alt="日本滨松于20世纪80年代开发出的直径为20英寸的光电倍增管"/><br/>
 日本滨松于20世纪80年代开发出的直径为20英寸的光电倍增管。这项发明在2014年被认定为<a href="https://ethw.org/Milestones:List_of_IEEE_Milestones">IEEE里程碑</a>之一。
 </div>
 
 光电倍增管被光子击中并产生光电子后，经过多级倍增，会产生一个近似对数高斯形状的脉冲输出。一个典型的波形如图所示，
-<div align=center>
+<div align="center">
 <img src="https://raw.githubusercontent.com/sacredfire666/JinpingDataCompetition/master/1tPrototype/doc/waveform.png" width = "50%" alt="单光电子波形"/><br/>
 一个典型的单光电子脉冲波形。这个波形中没有加入噪声。
 </div>
