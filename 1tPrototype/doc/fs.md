@@ -12,10 +12,10 @@
 
 使用[HDFView](https://www.hdfgroup.org/downloads/hdfview/)打开数据文件，可以查看文件的大致结构
 
-<center>
-![数据文件的结构](hdfview.png)
+<div align=center>
+<img src="https://raw.githubusercontent.com/sacredfire666/JinpingDataCompetition/master/1tPrototype/doc/hdfview.png" width = "100%" alt="数据文件的结构"/><br/>
 数据文件的结构
-</center>
+</div>
 
 ## 读取文件的示例
 
@@ -56,16 +56,16 @@ plt.show()
 h5file.close()
 ```
 这段程序将Waveform表中的第一个记录读取，并在GroundTruth表中取出对应的光电子到达时间，将其画出。得到的图像为
-<center>
-![读出波形](Figure_1.png)
-波形和击中时间的示例图
-</center>
 
-对200ns~400ns之间的波形进行放大，
-<center>
-![读出波形](Figure_2.png)
+<div align=center>
+<img src="https://raw.githubusercontent.com/sacredfire666/JinpingDataCompetition/master/1tPrototype/doc/Figure_1.png" width = "60%" alt="读出波形"/><br/>
+波形和击中时间的示例图
+</div>
+
+<div align=center>
+<img src="https://raw.githubusercontent.com/sacredfire666/JinpingDataCompetition/master/1tPrototype/doc/Figure_2.png" width = "60%" alt="读出波形"/><br/>
 波形局部放大
-</center>
+</div>
 
 可以看出该PMT上有3次击中，其中后两次离得较近，两个波形叠加得到一个较大、较宽的波形。
 
