@@ -39,7 +39,7 @@ FileNo = 0
 
 # Create the output file and the group
 h5file = tables.open_file(outputFileName, mode="w", title="OneTonDetector")
-group = h5file.create_group("/", "OneTonDetector", "OneTonDetector")
+group = "/"
 
 # Create tables
 TriggerInfoTable = h5file.create_table(group, "TriggerInfo", TriggerInfoData, "Trigger info")
