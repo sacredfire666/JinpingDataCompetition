@@ -121,7 +121,6 @@ int main( void )
 
     return 0;
 }
-=======
 ## 提交格式
 
 选手提交HDF5格式的文件，在文件中写入一个与数据集中GroundTruth表结构相同的表，并命名为为Answer
