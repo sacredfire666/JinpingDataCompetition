@@ -38,7 +38,8 @@ ROOT.PyConfig.IgnoreCommandLineOptions = True
 FileNo = 0
 
 # Create the output file and the group
-h5file = tables.open_file(outputFileName, mode="w", title="OneTonDetector")
+h5file = tables.open_file(outputFileName, mode="w", title="OneTonDetector",
+                          filters = tables.Filters(complevel=9))
 group = "/"
 
 # Create tables
