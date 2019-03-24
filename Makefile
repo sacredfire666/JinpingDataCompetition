@@ -15,11 +15,18 @@ $(mul:%=ftraining-%.mac): %: first.mac.in
 %.root: %.mac
 	JPSim -g 1t -m $^ -o ../$@ > $@.log 2>&1
 %.h5: %.root
-	python3 1tPrototype/ConvertTruth.py $^ $@ > $@.log 2>&1
+	sem --fg python3 1tPrototype/ConvertTruth.py $^ $@ > $@.log 2>&1
 
 %-problem.h5: %.h5
 	cp $^ $@
 	python3 -c 'import h5py; del h5py.File("$@")["GroundTruth"]'
+	h5repack -i $@ -o $@-tmp
+	mv -f $@-tmp $@
+%-ans.h5: %.h5
+	cp $^ $@
+	python3 -c 'import h5py; del h5py.File("$@")["Waveform"]'
+	h5repack -i $@ -o $@-tmp
+	mv -f $@-tmp $@
 %-submission.h5: %.h5
 	cp $^ $@
 	python3 example-submission.py $@
