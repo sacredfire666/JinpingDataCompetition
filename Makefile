@@ -5,7 +5,7 @@
 .PHONY: first zinc
 mul=$(shell seq 0 9)
 
-zinc: zinc-problem.h5 $(mul:%=ztraining-%.h5)
+zinc: zinc-ans.h5 zinc-problem.h5 $(mul:%=ztraining-%.h5)
 first: first-problem.h5 $(mul:%=ftraining-%.h5)
 
 $(mul:%=ftraining-%.mac): %: first.mac.in
@@ -19,6 +19,12 @@ $(mul:%=ztraining-%.mac): %: zinc.mac.in
 	JPSim -g 1t -m $^ -o ../$@ > $@.log 2>&1
 %.h5: %.root
 	sem --fg python3 1tPrototype/ConvertTruth.py $^ $@ > $@.log 2>&1
+
+zreal.h5: /home/jinping/JinpingData/Jinping_1ton_Data/01_RawData/run00000896/Jinping_1ton_Phy_20180723_00000895.root
+	python3 1tPrototype/Converter.py 895 --limit 40 -o $@
+
+zexample.h5: /home/jinping/JinpingData/Jinping_1ton_Data/01_RawData/run00000896/Jinping_1ton_Phy_20180723_00000896.root
+	python3 1tPrototype/Converter.py 896 --limit 1 -o $@
 
 %-problem.h5: %.h5
 	cp $^ $@
