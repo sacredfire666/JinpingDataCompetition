@@ -2,14 +2,17 @@
 # ConvertTruth.py is for simulations.
 # Convert.py is for real data.
 
-.PHONY: first
+.PHONY: first zinc
 mul=$(shell seq 0 9)
 
+zinc: zinc-problem.h5 $(mul:%=ztraining-%.h5)
 first: first-problem.h5 $(mul:%=ftraining-%.h5)
 
-first.mac: first.mac.in
-	sed 's,@seeds@,$(shell apg -M n -a 1 -n 2),' $^ > $@
 $(mul:%=ftraining-%.mac): %: first.mac.in
+	sed 's,@seeds@,$(shell apg -M n -a 1 -n 2),' $^ > $@
+$(mul:%=ztraining-%.mac): %: zinc.mac.in
+	sed 's,@seeds@,$(shell apg -M n -a 1 -n 2),' $^ > $@
+%.mac: %.mac.in
 	sed 's,@seeds@,$(shell apg -M n -a 1 -n 2),' $^ > $@
 
 %.root: %.mac
