@@ -20,11 +20,13 @@ $(mul:%=ztraining-%.mac): %: zinc.mac.in
 %.h5: %.root
 	sem --fg python3 1tPrototype/ConvertTruth.py $^ $@ > $@.log 2>&1
 
-zreal.h5: /home/jinping/JinpingData/Jinping_1ton_Data/01_RawData/run00000896/Jinping_1ton_Phy_20180723_00000895.root
-	python3 1tPrototype/Converter.py 895 --limit 40 -o $@
+zreal.h5: /home/jinping/JinpingData/Jinping_1ton_Data/01_RawData/run00000893/Jinping_1ton_Phy_20180722_00000893.root
+	python3 1tPrototype/Converter.py 893 --limit 2 -o $@
 
 zexample.h5: /home/jinping/JinpingData/Jinping_1ton_Data/01_RawData/run00000896/Jinping_1ton_Phy_20180723_00000896.root
-	python3 1tPrototype/Converter.py 896 --limit 1 -o $@
+	python3 1tPrototype/Converter.py 896 --limit 4 -o $@
+zincm-problem.h5: zinc-problem zreal.h5
+	mix.py
 
 %-problem.h5: %.h5
 	cp $^ $@

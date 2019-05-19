@@ -18,10 +18,9 @@ FileNo = 0
 windowSize = 1029
 
 wf_t=[("EventID", np.int64), ("ChannelID", np.int16), ("Waveform", np.int16, 1029)]
-
+ti_t=[("EventID", np.int64), ("Sec", np.int32), ("NanoSec", np.int32)]
 
 f = h5py.File(args.opt, "w")
-g1 = f.create_group("TriggerInfo")
 
 # Loop for ROOT files
 while True:
@@ -36,9 +35,11 @@ while True:
 
     # Allocate memery first, for efficiency
     nTrigger = t.GetEntries()
-    evtid = np.zeros((nTrigger,), dtype="int64")
-    sec = np.zeros((nTrigger,), dtype="int64")
-    nanosec = np.zeros((nTrigger,), dtype="int64")
+
+    ti = np.zeros(nTrigger, dtype=ti_t)
+    evtid = ti["EventID"]
+    sec = ti["Sec"]
+    nanosec = ti["NanoSec"]
 
     ch_entry = t.Draw("ChannelId","","goff")
 
@@ -72,19 +73,12 @@ while True:
     # Create dataset
     wav = wav.reshape(-1,windowSize)
     if FileNo==0:
-        dset0 = g1.create_dataset("EventID", data=evtid, maxshape=(None,))
-        dset1 = g1.create_dataset("Sec",     data=sec, maxshape=(None,))
-        dset2 = g1.create_dataset("NanoSec", data=nanosec, maxshape=(None,))
-
+        dti = f.create_dataset("TriggerInfo", data=ti, maxshape=(None,), compression="gzip", compression_opts=9)
         dwf = f.create_dataset("Waveform", data=wf, maxshape=(None,), compression="gzip", compression_opts=9)
     else:
-        dset0.resize(dset0.shape[0]+nTrigger, axis=0)
-        dset1.resize(dset1.shape[0]+nTrigger, axis=0)
-        dset2.resize(dset2.shape[0]+nTrigger, axis=0)
-        dset0[-evtid.shape[0]:] = evtid
-        dset1[-sec.shape[0]:] = sec
-        dset2[-nanosec.shape[0]:] = nanosec
         
+        dti.resize(dti.shape[0]+nTrigger, axis=0)
+        dti[-ti.shape[0]:] = ti
         dwf.resize(dwf.shape[0]+ch_entry, axis=0)
         dwf[-wf.shape[0]:] = wf
     FileNo = FileNo+1
