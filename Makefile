@@ -5,7 +5,7 @@
 .PHONY: first zinc
 mul=$(shell seq 0 9)
 
-zinc: zinc-ans.h5 zinc-problem.h5 $(mul:%=ztraining-%.h5)
+zinc: zincm-ans.h5 zincm-problem.h5 $(mul:%=ztraining-%.h5)
 first: first-problem.h5 $(mul:%=ftraining-%.h5)
 
 $(mul:%=ftraining-%.mac): %: first.mac.in
@@ -25,8 +25,8 @@ zreal.h5: /home/jinping/JinpingData/Jinping_1ton_Data/01_RawData/run00000893/Jin
 
 zexample.h5: /home/jinping/JinpingData/Jinping_1ton_Data/01_RawData/run00000896/Jinping_1ton_Phy_20180723_00000896.root
 	python3 1tPrototype/Converter.py 896 --limit 4 -o $@
-zincm-problem.h5: zinc-problem zreal.h5
-	mix.py
+zincm.h5: zinc.h5 zreal.h5
+	python3 1tPrototype/mix.py $< -r $(word 2,$^) -o $@
 
 %-problem.h5: %.h5
 	cp $^ $@
