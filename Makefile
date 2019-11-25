@@ -7,7 +7,7 @@ mul=$(shell seq 0 9)
 
 zinc: zincm-ans.h5 zincm-problem.h5 $(mul:%=ztraining-%.h5)
 first: first-problem.h5 $(mul:%=ftraining-%.h5)
-alpha: $(mul:%=atraining-%.h5)
+alpha: alpha-ans.h5 alpha-problem.h5 $(mul:%=atraining-%.h5)
 
 $(mul:%=ftraining-%.mac): %: first.mac.in
 	sed 's,@seeds@,$(shell apg -M n -a 1 -n 2),' $^ > $@
@@ -24,10 +24,10 @@ $(mul:%=atraining-%.mac): %: alpha.mac.in
 	sem --fg python3 1tPrototype/ConvertTruth.py $^ $@ > $@.log 2>&1
 
 zreal.h5: /home/jinping/JinpingData/Jinping_1ton_Data/01_RawData/run00000893/Jinping_1ton_Phy_20180722_00000893.root
-	python3 1tPrototype/Converter.py 893 --limit 2 -o $@
+	python3 1tPrototype/Converter.py 893 --limit 20 -o $@
 
 zexample.h5: /home/jinping/JinpingData/Jinping_1ton_Data/01_RawData/run00000896/Jinping_1ton_Phy_20180723_00000896.root
-	python3 1tPrototype/Converter.py 896 --limit 4 -o $@
+	python3 1tPrototype/Converter.py 896 --limit 40 -o $@
 zincm.h5: zinc.h5 zreal.h5
 	python3 1tPrototype/mix.py $< -r $(word 2,$^) -o $@
 

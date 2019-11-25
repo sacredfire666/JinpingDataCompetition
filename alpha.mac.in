@@ -24,7 +24,7 @@
 #/gps/direction 1 0 0 
 /gps/ene/type Lin
 /gps/ene/min 1 MeV
-/gps/ene/max 8 MeV
+/gps/ene/max 20 MeV
 /gps/ene/gradient 0
 /gps/ene/intercept 1
 
@@ -35,4 +35,4 @@
 /run/printProgress 100
 /run/initialize
 /run/verbose 1
-/run/beamOn 10000
+/run/beamOn 25000
